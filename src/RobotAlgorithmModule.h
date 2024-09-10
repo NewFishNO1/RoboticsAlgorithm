@@ -557,6 +557,18 @@ extern "C" {
 
 
 	/**
+	*@brief			Description:    计算与欧拉轴单位向量和旋转角度相对应的旋转矩阵
+	*@param[in]		omghat		    欧拉轴单位向量
+	*@param[in]		theta		    旋转角度，弧度
+	*@param[out]	R		        旋转矩阵
+	*@return		No return value.
+	*@note:
+	*@waring:
+	*/
+	void AxisAngToRot(double omghat[3], double theta, double R[3][3]);
+
+
+	/**
 	* @brief 			Description: Computes the unit quaternion corresponding to the Euler axis and rotation angle.
 	* @param[in]		omg				Unit vector of Euler axis.
 	* @param[in]		theta			Rotation angle.
