@@ -2101,6 +2101,35 @@ void RotToAxisAng(double R[3][3],double omghat[3],double *theta)
 
 
 /**
+*@brief			Description:    计算与欧拉轴单位向量和旋转角度相对应的旋转矩阵
+*@param[in]		omghat		    欧拉轴单位向量
+*@param[in]		theta		    旋转角度，弧度
+*@param[out]	R		        旋转矩阵
+*@return		No return value.
+*@note:
+*@waring:
+*/
+void AxisAngToRot(double omghat[3], double theta, double R[3][3])
+{
+	double sin_axis[3] = { sin(theta) * omghat[0] ,sin(theta) * omghat[1] ,sin(theta) * omghat[2] };
+	double cos1_axis[3] = { (1 - cos(theta)) * omghat[0],(1 - cos(theta)) * omghat[1] ,(1 - cos(theta)) * omghat[2] };
+	double temp;
+	temp = cos1_axis[0] * omghat[1];
+	R[0][1] = temp - sin_axis[2];
+	R[1][0] = temp + sin_axis[2];
+	temp = cos1_axis[0] * omghat[2];
+	R[0][2] = temp + sin_axis[1];
+	R[2][0] = temp - sin_axis[1];
+	temp = cos1_axis[1] * omghat[2];
+	R[1][2] = temp - sin_axis[0];
+	R[2][1] = temp + sin_axis[0];
+	R[0][0] = cos1_axis[0] * omghat[0] + cos(theta);
+	R[1][1] = cos1_axis[1] * omghat[1] + cos(theta);
+	R[2][2] = cos1_axis[2] * omghat[2] + cos(theta);
+}
+
+
+/**
  * @brief 			Description: Computes the unit quaternion corresponding to the Euler axis and rotation angle.
  * @param[in]		omg				Unit vector of Euler axis.
  * @param[in]		theta			Rotation angle.
